@@ -1,0 +1,4 @@
+1. stream object contains exceptions method, where you can pass control bits.
+After it stream would be fall down if bits is setted.
+2. http://www.cplusplus.com/reference/iostream/ios/rdbuf/
+3. anonymous namespace hides symbols from other translation units. Do not use in headers.
