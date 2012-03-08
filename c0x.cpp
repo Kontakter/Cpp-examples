@@ -2,23 +2,27 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <array>
 #include <unordered_map>
 #include <algorithm>
 #include <functional> // for methods: plus, divides, ...
 #include <valarray>
 using namespace std;
 
-// 1. Если в ассессоре вернуть внутренний вектор по значению? -- копирование или move?
-// 2. Примеры использования std::array
-// 3. Прочитать про nullptr
-// 4. Прочитать про async
+//8. Call one constructor from another. It is not supported in gcc 4.6
+// class LowerString {
+// public:
+//     LowerString(const std::string& str) {
+//         std::transform(str.begin(), str.end(), str.begin(), ::tolower);
+//     }
 // 
+//     LowerString(char letter, int length):
+//         LowerString(std::string(letter, length))
+//     { }
 // 
-// !!!
-// use BOOST_FOREACH(const auto&, container)
-// !!!
-// 
-
+// private:
+//     std::string str_;
+// };
 
 int main() {
     // GCC 4.6
@@ -74,16 +78,36 @@ int main() {
     }
     cout << endl;
 
-    //4. nullptr
-    //5. new enums
-    //7. Lambda functions + decltype
-    //8. Call one constructor from another
+    //7. nullptr
+    // There is no difference with NULL and 0, because of back compability.
 
-    // 10. Alias templates. New typedef syntax GCC 4.7
+    //8. new enums
+    enum class Letters {
+        A,
+        B,
+        C,
+        D,
+        E
+    };
+    Letters letter(Letters::A);
+    if (letter == Letters::A) {
+        cout << "letter equals to A" << endl;
+        cout << "letter number = " << static_cast<int>(letter) << endl;
+    }
+
+    //9. Static arrays and new iota (iota means range).
+    std::array<int, 10> static_array;
+    std::iota(static_array.begin(), static_array.end(), 0);
+    std::cerr << "Sum = " << std::accumulate(static_array.begin(), static_array.end(), 0) << std::endl;
+    
+    //10. Lambda functions + decltype
+    // It would be written later.
+
+    // 11. Alias templates. New typedef syntax GCC 4.7
     // typedef void (*Type)(double);       //Old style
     // using OtherType = void (*)(double); // New style
     
-    // 11. Static assert
+    // 12. Static assert
     static_assert(sizeof(int) == sizeof(uint32_t), "Problem!");
 
 }
